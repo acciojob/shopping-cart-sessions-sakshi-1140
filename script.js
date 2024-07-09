@@ -38,7 +38,7 @@ function renderCart() {
 
 // Add item to cart
 function addToCart(productId) {
-    console.log('initial cart', cart);
+    console.log('cart before adding', cart);
   const productToAdd = products.find((product) => product.id === productId);
   if (productToAdd) {
     cart.push(productToAdd);
@@ -50,7 +50,9 @@ function addToCart(productId) {
 
 // Remove item from cart
 function removeFromCart(productId) {
+    console.log('cart before removing', cart);
   cart = cart.filter((item) => item.id !== productId);
+  console.log('cart after removing', cart);
   sessionStorage.setItem("cart", JSON.stringify(cart));
   renderCart();
 
@@ -87,22 +89,23 @@ if (storedCart) {
 clearCartBtn.addEventListener("click", clearCart);
 
 //from doubt support using forEach - this is simple
+// but this is working only one time on page load  for remove-cart-button
 document.querySelectorAll(".add-to-cart-btn").forEach((item) => {
   item.addEventListener("click", (event) => {
     console.log('click add')
-    addToCart(event.target.dataset.id);
+    addToCart(parseInt(event.target.dataset.id));
   });
 });
 
 document.querySelectorAll(".remove-from-cart-btn").forEach((item) => {
   item.addEventListener("click", (event) => {
     console.log('click remove')
-    removeFromCart(event.target.dataset.id);
+    removeFromCart(parseInt(event.target.dataset.id));
   });
 });
 
 // //same thing from S solution using event delegation
-// // this is more efficient way.
+// // this is more efficient way. - and working perfectly
 // productList.addEventListener("click", (event) => {
 //     if (event.target.classList.contains("add-to-cart-btn")) {
 //       addToCart(parseInt(event.target.dataset.id));
