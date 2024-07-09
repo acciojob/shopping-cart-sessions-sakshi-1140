@@ -88,32 +88,32 @@ if (storedCart) {
 //1.for clear cart
 clearCartBtn.addEventListener("click", clearCart);
 
-//from doubt support using forEach - this is simple
-// but this is working only one time on page load  for remove-cart-button
-document.querySelectorAll(".add-to-cart-btn").forEach((item) => {
-  item.addEventListener("click", (event) => {
-    console.log('click add')
-    addToCart(parseInt(event.target.dataset.id));
-  });
-});
-
-document.querySelectorAll(".remove-from-cart-btn").forEach((item) => {
-  item.addEventListener("click", (event) => {
-    console.log('click remove')
-    removeFromCart(parseInt(event.target.dataset.id));
-  });
-});
-
-// //same thing from S solution using event delegation
-// // this is more efficient way. - and working perfectly
-// productList.addEventListener("click", (event) => {
-//     if (event.target.classList.contains("add-to-cart-btn")) {
-//       addToCart(parseInt(event.target.dataset.id));
-//     }
+// //from doubt support using forEach - this is simple - will pass accio test case
+// // but this is working only one time on page load  for remove-cart-button
+// document.querySelectorAll(".add-to-cart-btn").forEach((item) => {
+//   item.addEventListener("click", (event) => {
+//     console.log('click add')
+//     addToCart(parseInt(event.target.dataset.id));
 //   });
+// });
 
-//   cartList.addEventListener("click", (event) => {
-//     if (event.target.classList.contains("remove-from-cart-btn")) {
-//       removeFromCart(parseInt(event.target.dataset.id));
-//     }
+// document.querySelectorAll(".remove-from-cart-btn").forEach((item) => {
+//   item.addEventListener("click", (event) => {
+//     console.log('click remove')
+//     removeFromCart(parseInt(event.target.dataset.id));
 //   });
+// });
+
+//same thing from S solution using event delegation
+// this is more efficient way. - and working perfectly all the way
+productList.addEventListener("click", (event) => {
+    if (event.target.classList.contains("add-to-cart-btn")) {
+      addToCart(parseInt(event.target.dataset.id));
+    }
+  });
+
+  cartList.addEventListener("click", (event) => {
+    if (event.target.classList.contains("remove-from-cart-btn")) {
+      removeFromCart(parseInt(event.target.dataset.id));
+    }
+  });
